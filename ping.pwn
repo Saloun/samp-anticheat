@@ -22,8 +22,9 @@ public OnPlayerConnect(playerid)
   return 1;
 }
 
-public OnPlayerDisconnect(playerid)
+public OnPlayerDisconnect(playerid, reason)
 {
+  #pragma unused reason
   pingPlayers[playerid] = 0;
   return 1;
 }
