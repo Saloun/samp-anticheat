@@ -7,15 +7,16 @@
 
 #include <a_samp>
 
-#define antispam_warning_color 0xFF9900AA
-#define antispam_warning_text2 "[Anti-Spam]: Don't write messages so fast!"
-#define antispam_warning_text1 "[Anti-Spam]: Don't repeat yourself!"
-#define antispam_throttle_msec 1000 // Time in milliseconds between two messages detected as flooding
+#define antispam_warning_color 0xff9900aa
+#define antispam_warning_text2 "[Anti-Spam]: Don't write messages so fast!" // The message when the player floods
+#define antispam_warning_text1 "[Anti-Spam]: Don't repeat yourself!" // The message when the player repeats
+#define antispam_throttle_msec 1500 // Time in milliseconds between two messages detected as flooding (1000 milliseconds = 1 seconds)
 #define antispam_show_warning // Comment this if AntiSpam should not warn users about flooding
-#define antispam_block_message // Comment this if AntiSpam should not block flooded messages
+#define antispam_block_message // Comment this if AntiSpam should not block flooded messages ( not recommended to comment out )
+#define antispam_behavior_doublecheck true // If true, it checks the time between flood messages, too ( recommended ) [added in r3)
 
 enum flood_Players {
-  Last_Message[128+2],
+  Last_Message[128],
   Last_Tick,
   Last_Spamtype // 0: no spam - 1: repeating - 2: flooding
 }
@@ -34,19 +35,12 @@ public OnPlayerConnect(playerid)
   return 1;
 }
 
-public OnPlayerDisconnect(playerid, reason)
-{
-  #pragma unused reason
-  floodPlayers[playerid][Last_Tick] = 0;
-  return 1;
-}
-
 public OnPlayerText(playerid, text[])
 {
   if (IsPlayerSpamming(playerid, text))
   {
     #if defined antispam_show_warning
-    switch (GetPlayerSpamType(playerid))
+    switch (floodPlayers[playerid][Last_Spamtype])
     {
       case 1:
       {
@@ -73,8 +67,7 @@ stock IsPlayerSpamming(playerid, message[])
   {
     floodPlayers[playerid][Last_Tick] = GetTickCount();
     floodPlayers[playerid][Last_Spamtype] = 0;
-//  strcat(message, floodPlayers[playerid][Last_Message]); // This generates warning
-    format(floodPlayers[playerid][Last_Message], 128+2, "%s", message); // This probably a bit slower but does not generate warning
+    format(floodPlayers[playerid][Last_Message], 128, "%s", message);
     return 0;
   }
 
@@ -86,18 +79,15 @@ stock IsPlayerSpamming(playerid, message[])
   
   if (GetTickCount() - floodPlayers[playerid][Last_Tick] < antispam_throttle_msec)
   {
+    #if antispam_behavior_doublecheck
+      floodPlayers[playerid][Last_Tick] = GetTickCount();
+    #endif
     floodPlayers[playerid][Last_Spamtype] = 2;
     return 1;
   }
 
   floodPlayers[playerid][Last_Spamtype] = 0;
-//strcat(message, floodPlayers[playerid][Last_Message]); // This generates warning
-  format(floodPlayers[playerid][Last_Message], 128+2, "%s", message); // This probably a bit slower but does not generate warning
+  format(floodPlayers[playerid][Last_Message], 128, "%s", message);
   floodPlayers[playerid][Last_Tick] = GetTickCount();
   return 0;
-}
-
-stock GetPlayerSpamType(playerid)
-{
-  return floodPlayers[playerid][Last_Spamtype];
 }
