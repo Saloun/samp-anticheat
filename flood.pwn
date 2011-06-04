@@ -13,7 +13,8 @@
 #define antispam_throttle_msec 1500 // Time in milliseconds between two messages detected as flooding (1000 milliseconds = 1 seconds)
 #define antispam_show_warning // Comment this if AntiSpam should not warn users about flooding
 #define antispam_block_message // Comment this if AntiSpam should not block flooded messages ( not recommended to comment out )
-#define antispam_behavior_doublecheck true // If true, it checks the time between flood messages, too ( recommended ) [added in r3)
+#define antispam_behavior_doublecheck true // If true, it checks the time between flood messages, too ( recommended ) [added in r6]
+//#define antispam_admins_can_spam // Uncomment this to let RCON admins spam
 
 enum flood_Players {
   Last_Message[128],
@@ -39,6 +40,9 @@ public OnPlayerText(playerid, text[])
 {
   if (IsPlayerSpamming(playerid, text))
   {
+    #if defined antispam_admins_can_spam
+      if (IsPlayerAdmin(playerid)) return 1;
+    #endif
     #if defined antispam_show_warning
     switch (floodPlayers[playerid][Last_Spamtype])
     {
