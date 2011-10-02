@@ -1,0 +1,15 @@
+#summary Anti Dialog Hack include - adh.inc
+
+= Introduction =
+
+Client could send fake OnDialogResponse callbacks to the server, with fake dialogid.
+This include prevents this attack, every ShowPlayerDialog is tracked by the server and protects scripts when an OnDialogResponse fired.
+
+= Usage=
+`#include <adh>` in every script where you use either ShowPlayerDialog or OnDialogResponse (or both).
+
+Added a simple function to get a player's current dialog: `GetPlayerDialogID(playerid);`
+
+= Changelog =
+
+0.0.1 initial release
