@@ -14,7 +14,8 @@
 #define antispam_show_warning // Comment this if AntiSpam should not warn users about flooding
 #define antispam_block_message // Comment this if AntiSpam should not block flooded messages ( not recommended to comment out )
 #define antispam_behavior_doublecheck true // If true, it checks the time between flood messages, too ( recommended ) [added in r6]
-//#define antispam_admins_can_spam // Uncomment this to let RCON admins spam
+#define antispam_behavior_ignorecaps true // if true, it does not check the case of messages ( example will be same as ExAmplE ) [added in r13]
+//#define antispam_admins_can_spam // Uncomment this to allow RCON admins spam
 
 enum flood_Players {
   Last_Message[128],
@@ -33,6 +34,8 @@ public OnFilterScriptInit()
 public OnPlayerConnect(playerid)
 {
   floodPlayers[playerid][Last_Tick] = 0;
+  floodPlayers[playerid][Last_Message][0] = 0;
+  floodPlayers[playerid][Last_Spamtype] = 0;
   return 1;
 }
 
@@ -71,11 +74,12 @@ stock IsPlayerSpamming(playerid, message[])
   {
     floodPlayers[playerid][Last_Tick] = GetTickCount();
     floodPlayers[playerid][Last_Spamtype] = 0;
-    format(floodPlayers[playerid][Last_Message], 128, "%s", message);
+    floodPlayers[playerid][Last_Message][0] = 0;
+    strcat(floodPlayers[playerid][Last_Message], message);
     return 0;
   }
 
-  if (!strcmp(message, floodPlayers[playerid][Last_Message], false))
+  if (strcmp(message, floodPlayers[playerid][Last_Message], antispam_behavior_ignorecaps) == 0)
   {
     floodPlayers[playerid][Last_Spamtype] = 1;
     return 1;
@@ -91,7 +95,8 @@ stock IsPlayerSpamming(playerid, message[])
   }
 
   floodPlayers[playerid][Last_Spamtype] = 0;
-  format(floodPlayers[playerid][Last_Message], 128, "%s", message);
+  floodPlayers[playerid][Last_Message][0] = 0;
+  strcat(floodPlayers[playerid][Last_Message], message);
   floodPlayers[playerid][Last_Tick] = GetTickCount();
   return 0;
 }
