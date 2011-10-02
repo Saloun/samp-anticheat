@@ -31,9 +31,25 @@ forward SA_ADH_OGI();
 public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 {
   new SA_ADH_ODR_dialogid = GetPVarInt(playerid, "dId1");
-  if (SA_ADH_ODR_dialogid < 1 || SA_ADH_ODR_dialogid > 32767) return 1;
-  SetPVarInt(playerid, "dId1", 0);
-  return SA_ADH_DR ? SA_ADH_cODR(playerid, SA_ADH_ODR_dialogid, response, listitem, inputtext) : 0;
+  if (SA_ADH_ODR_dialogid < 1 || SA_ADH_ODR_dialogid > 32767) return 1; /* illegal dialog ids */
+  if (SA_ADH_DR)
+  {
+    if (SA_ADH_cODR(playerid, SA_ADH_ODR_dialogid, response, listitem, inputtext) == 1) /* the current script handled the dialog */
+    {
+      SetPVarInt(playerid, "dId1", 0);
+      return 1;
+    }
+    else /* the current script is not responsible for the dialog, pass it to others */
+    {
+      return 0;
+    }
+  }
+  else /* the current script doesn't have OnDialogResponse, pass it to others */
+  {
+    return 0;
+  }
+  
+  return 0; /* ignores warning */
 }
 
 public OnFilterScriptInit()
