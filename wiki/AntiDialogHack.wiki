@@ -12,6 +12,9 @@ Added a simple function to get a player's current dialog: `GetPlayerDialogID(pla
 
 === Changelog ===
 
+0.0.3 fixed a critical fault that prevented
+script from running in gamemodes
+
 0.0.2 fixed a bug with deleting PVars - now every script gets its corresponding dialogid
 fixed a possible warning in pawncc
 warning: if `ShowPlayerDialog` used with a dialogid which does not get handled anywhere, PVar won't get reset, and `OnDialogResponse` may be spammed with the "stucked" ID (only when player is sending fake packets)
