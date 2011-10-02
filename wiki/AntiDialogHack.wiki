@@ -1,16 +1,16 @@
 #summary Anti Dialog Hack include - adh.inc
 
-== Introduction ==
+= Introduction =
 
 Client could send fake `DialogResponse` packets to the server, with fake dialogid, which fires `OnDialogResponse` callback in PAWN.
 This include prevents this attack, every `ShowPlayerDialog` is tracked by the server and protects scripts when an `OnDialogResponse` fired.
 
-= Usage=
+== Usage ==
 `#include <adh>` in every script where you use either `ShowPlayerDialog` or `OnDialogResponse` (or both).
 
 Added a simple function to get a player's current dialog: `GetPlayerDialogID(playerid);`
 
-= Changelog =
+=== Changelog ===
 
 0.0.2 fixed a bug with deleting PVars - now every script gets its corresponding dialogid
 fixed a possible warning in pawncc
