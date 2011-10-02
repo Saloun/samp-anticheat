@@ -60,7 +60,7 @@ public OnFilterScriptInit()
 
 public OnGameModeInit()
 {
-  SA_ADH_DR = bool:(funcidx("OnDialogResponse") != -1);
+  SA_ADH_DR = bool:(funcidx("SA_ADH_ODR") != -1);
   return (funcidx("SA_ADH_OGI") == -1) ? 1 : CallLocalFunction("SA_ADH_OGI", "");
 }
 
