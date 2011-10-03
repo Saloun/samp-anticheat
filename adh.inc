@@ -32,6 +32,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 {
   new SA_ADH_ODR_dialogid = GetPVarInt(playerid, "dId1");
   if (SA_ADH_ODR_dialogid < 1 || SA_ADH_ODR_dialogid > 32767) return 1; /* illegal dialog ids */
+  if (inputtext[0] == 0) inputtext[0] = 1; /* avoid crash on empty inputtext */
   if (SA_ADH_DR)
   {
     if (SA_ADH_cODR(playerid, SA_ADH_ODR_dialogid, response, listitem, inputtext) == 1) /* the current script handled the dialog */
