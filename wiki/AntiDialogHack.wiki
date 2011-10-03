@@ -12,6 +12,8 @@ Added a simple function to get a player's current dialog: `GetPlayerDialogID(pla
 
 === Changelog ===
 
+0.0.5 crash fix on empty inputtext variable
+
 0.0.4 fixed a warning caused by fixing a warning.
 
 0.0.3 fixed a critical fault that prevented
