@@ -48,8 +48,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
   {
     return 0;
   }
-  
-  return 0; /* ignores warning */
 }
 
 public OnFilterScriptInit()
