@@ -12,6 +12,8 @@ Added a simple function to get a player's current dialog: `GetPlayerDialogID(pla
 
 === Changelog ===
 
+0.0.4 fixed a warning caused by fixing a warning.
+
 0.0.3 fixed a critical fault that prevented
 script from running in gamemodes *edit: okay, not a critical fault, but it caused a slowdown and a hole in the ALS logic of the include.*
 
