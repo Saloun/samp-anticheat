@@ -40,6 +40,7 @@ public OnPlayerUpdate(playerid)
     format(msg, sizeof(msg), PING_KICK_MESSAGE_TO_ALL, pName);
     SendClientMessage(playerid, PING_KICK_COLOR, PING_KICK_MESSAGE);
     SendClientMessageToAll(PING_KICK_COLOR, msg);
+    print(msg);
     Kick(playerid);
   }
   return 1;
