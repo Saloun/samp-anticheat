@@ -8,12 +8,11 @@
 #define PING_MAX_PING 160 // The maximum of allowed latency in milliseconds
 #define PING_PROBES 5 // If the player's latency is more than the maximum allowed {PING_PROBES} times in a row he gets kicked (to avoid packet loss)
 #define PING_KICK_MESSAGE "[High Ping Checker] You have been kicked due to high ping." // The message shown to user when gets kicked
-#define PING_KICK_MESSAGE_TO_ALL "[High Ping Checker] %s have been kicked due to high ping." // The message shown to all users when player gets kicked
-#define PING_KICK_COLOR #ff0000ff // The color of the messages
+#define PING_KICK_MESSAGE_TO_ALL "[High Ping Checker] %s has been kicked due to high ping." // The message shown to all users when player gets kicked
+#define PING_KICK_COLOR 0xff0000ff // The color of the messages
 
 
 #include <a_samp>
-
 new pingPlayers[MAX_PLAYERS];
 
 public OnPlayerConnect(playerid)
@@ -24,6 +23,7 @@ public OnPlayerConnect(playerid)
 
 public OnPlayerUpdate(playerid)
 {
+  static pPing;
   pPing = GetPlayerPing(playerid);
   if (pPing < PING_MAX_PING)
   {
