@@ -37,7 +37,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
   {
     iReturnValue = CallLocalFunction("ADH_OnDialogResponse",
     "iiiis",                               /* we pass 4 integers and 1 string */
-    playerid, iDialogID, response, listitem,              /* pass the integers */
+    playerid, iDialogID, response, listitem,             /* pass the integers */
     inputtext[0] == 0 ?                    /* is the string completely empty? */
     szDummy :                       /* pass a dummy value to prevent crashing */
     inputtext                                  /* pass inputtext if not empty */
