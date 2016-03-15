@@ -1,0 +1,20 @@
+# Contributors to project #
+
+## Filterscripts ##
+
+| **Nickname** | **In-game name** | **Filterscript name** | **What was done** |
+|:-------------|:-----------------|:----------------------|:------------------|
+
+
+## Translators ##
+
+| **Nickname** | **Translation language** | **Language code** |
+|:-------------|:-------------------------|:------------------|
+| koczkahun    | English                  | en-US             |
+| koczkahun    | Hungarian                | hu                |
+
+
+# Special thanks to #
+
+  * The SA-MP Team - _http://sa-mp.com_
+  * Google Code - _http://code.google.com/hosting_
