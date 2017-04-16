@@ -2,7 +2,7 @@
 
 SA-MP Anticheat. Useful for SA-MP Servers Owners.
 
-----------------------------------
+---------------------------------------
 
 
 Contains:
@@ -10,7 +10,15 @@ Contains:
 1. Ping Limiter.
 2. Flood Protection. (Anti-Spam)
 
-----------------------------------
+---------------------------------------
+
+You can pm me if you have any issues with this.
 
 
-If you need any help contact me on irc.freenode.net @ #kielbnc
+
+
+NOTE: I DIDN'T MAKE THIS.
+
+
+
+
