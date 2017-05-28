@@ -1,7 +1,7 @@
 /*
  *
  * Anti-Flood and Anti-Repeat script
- * http://code.google.com/p/samp-anticheat
+ * 
  *
 */
 
@@ -27,7 +27,7 @@ new floodPlayers[MAX_PLAYERS][flood_Players];
 
 public OnFilterScriptInit()
 {
-  print("\nLoading flood protection - http://code.google.com/p/samp-anticheat\n");
+  print("\nLoading flood protection\n");
   return 1;
 }
 
